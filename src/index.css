@@ -96,6 +96,7 @@ button,
 [data-name*="Link"], 
 .cursor-pointer {
   transition: all 0.2s ease-in-out !important;
+  cursor: pointer !important;
 }
 
 button:not(:disabled):hover, 

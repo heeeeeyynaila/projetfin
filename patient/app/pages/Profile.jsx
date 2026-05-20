@@ -4,7 +4,7 @@ import MyProfile from '../../imports/MyProfile/MyProfile';
 export default function Profile() {
   const navigate = useNavigate();
   const handleNavClick = (e) => {
-    const link = e.target.closest('[data-name*="Link"]');
+    const link = e.target.closest('[data-name*="Link"], [data-name*="Button"]');
     if (!link) return;
     const text = link.textContent?.trim().toLowerCase();
     if (text?.includes('dashboard'))       { e.preventDefault(); navigate('/patient'); }

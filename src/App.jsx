@@ -34,13 +34,36 @@ import {
 } from '../patient/app/pages';
 
 // ── Admin wrapper helpers ──
-const wrap = (Component) => () => (
-  <div className="w-full min-h-screen">
-    <div className="[&>div]:!pl-0">
-      <Component />
+import { useNavigate } from 'react-router';
+
+const AdminWrapper = ({ Component }) => {
+  const navigate = useNavigate();
+  const handleNavClick = (e) => {
+    const btn = e.target.closest('[data-name*="Button"], [data-name*="Link"]');
+    if (!btn) return;
+    const text = btn.textContent?.trim().toLowerCase() || '';
+    
+    if (text.includes('add doctor')) { e.preventDefault(); navigate('/admin/add-doctor'); }
+    else if (text.includes('add service')) { e.preventDefault(); navigate('/admin/add-service'); }
+    else if (text.includes('add department')) { e.preventDefault(); navigate('/admin/add-department'); }
+    else if (text.includes('new announcement')) { e.preventDefault(); navigate('/admin/new-announcement'); }
+    else if (text.includes('patient')) { e.preventDefault(); navigate('/admin/patients'); }
+    else if (text.includes('doctor')) { e.preventDefault(); navigate('/admin/doctors'); }
+    else if (text.includes('schedule')) { e.preventDefault(); navigate('/admin/schedule'); }
+    else if (text.includes('appointment')) { e.preventDefault(); navigate('/admin/appointments'); }
+    else if (text.includes('setting')) { e.preventDefault(); navigate('/admin/settings'); }
+  };
+
+  return (
+    <div className="w-full min-h-screen" onClick={handleNavClick}>
+      <div className="[&>div]:!pl-0">
+        <Component />
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
+const wrap = (Component) => () => <AdminWrapper Component={Component} />;
 
 const wrapPatient = (Component) => () => (
   <div className="w-full min-h-screen bg-[#f1f5f9] overflow-x-hidden">
@@ -143,7 +166,7 @@ function GlobalClickInterceptor({ children }) {
 
   useEffect(() => {
     const handleClick = (e) => {
-      const target = e.target.closest('button, [data-name*="Button"]');
+      const target = e.target.closest('button, [data-name*="Button"], [data-name*="Link"]');
       if (!target) return;
 
       const text = target.textContent?.trim().toLowerCase() || '';

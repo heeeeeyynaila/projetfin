@@ -9,11 +9,12 @@ export default function BookAppointment() {
 
   const handleNavClick = (e) => {
     const text = e.target.textContent?.trim().toLowerCase() || '';
-    const buttonName = e.target.closest('[data-name*="Button"]')?.textContent?.toLowerCase() || '';
+    const buttonName = e.target.closest('[data-name*="Button"], [data-name*="Link"]')?.textContent?.toLowerCase() || '';
     
-    // Intercept "Confirm Booking"
-    if (text.includes('confirm booking') || buttonName.includes('confirm booking')) {
+    // Intercept "Confirm Booking" or "Next"
+    if (text.includes('confirm booking') || buttonName.includes('confirm booking') || text.includes('next:') || text.includes('view urgent care map') || buttonName.includes('next')) {
       e.preventDefault();
+      e.stopPropagation();
       showToast('Booking Confirmed! Your appointment has been successfully scheduled.', 'success');
       setTimeout(() => {
         navigate('/patient/appointments');
@@ -21,22 +22,16 @@ export default function BookAppointment() {
       return;
     }
 
-    // Intercept Previous Step / Next
+    // Intercept Previous Step
     if (text.includes('previous step') || buttonName.includes('previous step')) {
       e.preventDefault();
-      showToast('Going back to previous step...', 'info');
-      // Just simulate going back or actually navigate(-1)
-      setTimeout(() => navigate(-1), 1000);
+      e.stopPropagation();
+      showToast('Going back to dashboard...', 'info');
+      setTimeout(() => navigate('/patient'), 1000);
       return;
     }
 
-    if (text.includes('next:') || text.includes('view urgent care map')) {
-       e.preventDefault();
-       showToast('Proceeding to next step...', 'success');
-       return;
-    }
-
-    const link = e.target.closest('[data-name*="Link"]');
+    const link = e.target.closest('[data-name*="Link"], [data-name*="Button"]');
     if (!link) return;
     const linkText = link.textContent?.trim().toLowerCase();
     if (linkText?.includes('dashboard'))       { e.preventDefault(); navigate('/patient'); }
