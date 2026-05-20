@@ -13,7 +13,6 @@ export function Sidebar({ collapsed }) {
 
   const bottomItems = [
     { name: "Settings", path: "/patient/settings", icon: Settings },
-    { name: "Back to Home", path: "/", icon: Home },
   ];
 
   return (
@@ -64,29 +63,13 @@ export function Sidebar({ collapsed }) {
           ))}
         </nav>
         
-        {!collapsed ? (
-          <div className="bg-[#f8fafc] rounded-2xl p-4 border border-[#e2e8f0]">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="size-10 rounded-full bg-gradient-to-br from-[#006591] to-[#0ea5e9] flex items-center justify-center text-white font-bold border-2 border-[#e0f2fe]">
-                JS
-              </div>
-              <div>
-                <div className="font-bold text-sm text-[#171c1f]">John Smith</div>
-                <div className="text-xs text-[#64748b]">Patient ID: P-2024-147</div>
-              </div>
-            </div>
-            <NavLink
-              to="/"
-              className="flex items-center justify-center gap-2 w-full py-2 text-sm font-semibold text-[#dc2626] bg-[#fee2e2] rounded-xl hover:bg-[#fecaca] transition-colors"
-            >
-              <Home className="size-4" /> Back to Home
-            </NavLink>
-          </div>
-        ) : (
-          <NavLink to="/" className="flex items-center justify-center size-10 rounded-xl bg-[#fee2e2] text-[#dc2626] hover:bg-[#fecaca] transition-colors mx-auto">
-            <Home className="size-5" />
-          </NavLink>
-        )}
+        <NavLink
+          to="/"
+          className={`flex items-center gap-3 py-2.5 px-3 rounded-xl transition-all text-[#dc2626] bg-[#fee2e2] hover:bg-[#fecaca] ${collapsed ? 'justify-center' : ''}`}
+        >
+          <Home className="size-5 shrink-0" />
+          {!collapsed && <span className="text-sm font-bold">Back to Home</span>}
+        </NavLink>
       </div>
     </div>
   );
