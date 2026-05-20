@@ -41,6 +41,7 @@ export default function BookAppointment() {
   const [selectedTime, setSelectedTime] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const steps = [
     { num: 1, label: 'Choose Service', icon: Stethoscope },
@@ -353,7 +354,7 @@ export default function BookAppointment() {
                 else if (!selectedTime) showToast('Please select a time first', 'error');
                 return;
               }
-              if (!isSubmitting) handleConfirm();
+              setShowConfirmModal(true);
             }}
             disabled={isSubmitting}
             className={`flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-green-600 to-emerald-500 shadow-lg shadow-green-500/20 hover:shadow-xl hover:scale-[1.02] active:scale-[0.97] transition-all disabled:cursor-not-allowed ${!canProceed() && !isSubmitting ? 'opacity-50 hover:scale-100 hover:shadow-lg' : ''}`}
@@ -372,6 +373,53 @@ export default function BookAppointment() {
           </button>
         )}
       </div>
+      {/* Confirmation Modal */}
+      {showConfirmModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-slate-200 animate-scale-in">
+            <div className="size-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CalendarDays className="size-8 text-blue-500" />
+            </div>
+            <h3 className="text-2xl font-bold text-slate-900 text-center mb-2">Confirm Appointment</h3>
+            <p className="text-slate-500 text-center mb-6">Please review the details below before finalizing your booking.</p>
+            
+            <div className="bg-slate-50 rounded-2xl p-4 mb-8 space-y-3 border border-slate-100">
+              <div className="flex items-center gap-3">
+                <UserRound className="size-5 text-slate-400" />
+                <span className="font-semibold text-slate-700">{selectedDoctor?.name}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Stethoscope className="size-5 text-slate-400" />
+                <span className="font-semibold text-slate-700">{selectedService?.name}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Clock className="size-5 text-slate-400" />
+                <span className="font-semibold text-slate-700">
+                  {new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })} at {selectedTime}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <button 
+                onClick={() => setShowConfirmModal(false)}
+                className="flex-1 py-3 px-4 rounded-xl font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={() => {
+                  setShowConfirmModal(false);
+                  handleConfirm();
+                }}
+                className="flex-1 py-3 px-4 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all"
+              >
+                Yes, Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
