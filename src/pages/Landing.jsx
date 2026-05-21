@@ -64,36 +64,23 @@ export default function Landing() {
   return (
     <div className="min-h-screen flex flex-col bg-white relative overflow-hidden">
       {/* Animated Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-gradient-to-br from-white to-[#f0f9ff]">
-        <div className="absolute right-0 top-0 w-[60%] h-full opacity-40">
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-            <g className="animate-[spin_40s_linear_infinite]" transform-origin="400 400">
-              <circle cx="600" cy="200" r="150" fill="#bae6fd" className="animate-[pulse_4s_ease-in-out_infinite]" />
-              <circle cx="200" cy="600" r="200" fill="#e0f2fe" className="animate-[pulse_5s_ease-in-out_infinite_0.5s]" />
-              <circle cx="700" cy="600" r="100" fill="#bfdbfe" className="animate-[pulse_3s_ease-in-out_infinite_1s]" />
-            </g>
-            <g className="animate-[bounce_8s_ease-in-out_infinite]" transform-origin="400 400">
-              <path d="M400,100 Q450,50 500,100 T600,100" stroke="#38bdf8" strokeWidth="8" fill="none" strokeLinecap="round" opacity="0.5" />
-              <path d="M200,300 Q250,250 300,300 T400,300" stroke="#38bdf8" strokeWidth="8" fill="none" strokeLinecap="round" opacity="0.3" />
-            </g>
-          </svg>
-          <div className="absolute top-[20%] right-[20%] animate-[bounce_6s_ease-in-out_infinite] opacity-30">
-            <Heart className="w-24 h-24 text-[#0ea5e9]" fill="currentColor" />
-          </div>
-          <div className="absolute top-[60%] right-[40%] animate-[bounce_5s_ease-in-out_infinite_1s] opacity-20">
-            <Activity className="w-32 h-32 text-[#0ea5e9]" />
-          </div>
-          <div className="absolute top-[40%] right-[10%] animate-[bounce_7s_ease-in-out_infinite_0.5s] opacity-20">
-            <Baby className="w-20 h-20 text-[#0ea5e9]" />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/40 to-transparent" />
-        </div>
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div 
+          className="absolute inset-0 w-full h-full opacity-30" 
+          style={{ 
+            backgroundImage: 'url(/hero-bg.png)', 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center' 
+          }} 
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent" />
       </div>
 
       {/* Navigation */}
       <header className="relative z-10 flex items-center justify-between px-10 lg:px-16 py-6">
         {/* Logo */}
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => setShowLogin(false)}>
+          <img src="/logo.png" alt="Arcio Logo" className="h-10 object-contain rounded" />
           <span className="text-xl font-extrabold text-[#1a1a2e] tracking-tight">Arcio</span>
         </div>
 
@@ -267,7 +254,7 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className="relative z-10 flex items-center justify-between px-10 lg:px-16 py-6 border-t border-[#f3f4f6]">
-        <span className="text-xs text-[#9ca3af]">© 2024 Arcio Clinical</span>
+        <span className="text-xs text-[#9ca3af]">© 2026 Arcio Clinical</span>
         <div className="flex items-center gap-6">
           {['Privacy', 'Standards', 'HIPAA Compliant'].map((item) => (
             <span key={item} className="text-xs font-semibold uppercase tracking-wider text-[#9ca3af]">
