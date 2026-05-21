@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router';
 
 // Auth & Landing pages
-import { Landing, PatientLogin, DoctorLogin, AdminLogin } from './pages';
+import { Landing, PatientLogin, DoctorLogin, AdminLogin, PublicBooking } from './pages';
 
 // Admin portal
 import AdminLayout from '../admin/app/components/Layout';
@@ -82,6 +82,7 @@ const router = createBrowserRouter([
   { path: '/login/patient', Component: PatientLogin },
   { path: '/login/doctor',  Component: DoctorLogin  },
   { path: '/login/admin',   Component: AdminLogin   },
+  { path: '/book-appointment', Component: PublicBooking },
 
   // ── Admin dashboard ──
   {

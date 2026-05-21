@@ -46,19 +46,25 @@ export default function PatientLogin() {
       `}</style>
 
       {/* Animated Background Elements */}
-      <div style={{ position: 'absolute', top: '10%', left: '10%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, rgba(14,165,233,0.2) 0%, transparent 60%)', borderRadius: '50%', filter: 'blur(60px)', animation: 'float1 12s ease-in-out infinite' }} />
-      <div style={{ position: 'absolute', bottom: '10%', right: '10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, rgba(2,132,199,0.15) 0%, transparent 60%)', borderRadius: '50%', filter: 'blur(60px)', animation: 'float2 15s ease-in-out infinite reverse' }} />
-      <div style={{ position: 'absolute', bottom: '40%', left: '60%', width: '22vw', height: '22vw', background: 'radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 60%)', borderRadius: '50%', filter: 'blur(50px)', animation: 'float1 14s ease-in-out infinite reverse' }} />
+      <div className="absolute inset-0 z-0 overflow-hidden bg-gradient-to-br from-white to-[#f0f9ff]">
+        <div className="absolute right-0 top-0 w-[80%] h-full opacity-50">
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+            <g className="animate-[spin_40s_linear_infinite]" transform-origin="400 400">
+              <circle cx="600" cy="200" r="150" fill="#bae6fd" className="animate-[pulse_4s_ease-in-out_infinite]" />
+              <circle cx="200" cy="600" r="200" fill="#e0f2fe" className="animate-[pulse_5s_ease-in-out_infinite_0.5s]" />
+              <circle cx="700" cy="600" r="100" fill="#bfdbfe" className="animate-[pulse_3s_ease-in-out_infinite_1s]" />
+            </g>
+            <g className="animate-[bounce_8s_ease-in-out_infinite]" transform-origin="400 400">
+              <path d="M400,100 Q450,50 500,100 T600,100" stroke="#38bdf8" strokeWidth="8" fill="none" strokeLinecap="round" opacity="0.5" />
+              <path d="M200,300 Q250,250 300,300 T400,300" stroke="#38bdf8" strokeWidth="8" fill="none" strokeLinecap="round" opacity="0.3" />
+            </g>
+          </svg>
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/40 to-transparent" />
+        </div>
+      </div>
 
       {/* Central Glass Card */}
-      <div style={{
-        position: 'relative', zIndex: 10, width: '100%', maxWidth: '440px',
-        background: '#ffffff',
-        border: '1px solid #e2e8f0',
-        borderRadius: '32px', padding: '48px',
-        boxShadow: '0 24px 48px -12px rgba(0,0,0,0.05)',
-        animation: 'cardAppear 0.7s cubic-bezier(0.16,1,0.3,1) forwards'
-      }}>
+      <div className="relative z-10 w-full max-w-[440px] bg-white/90 backdrop-blur-xl border border-white/50 rounded-[32px] p-12 shadow-2xl animate-in fade-in slide-in-from-bottom-8 duration-700">
         
         <button onClick={() => navigate('/')} style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: 'none', color: '#64748b', fontSize: 13, cursor: 'pointer', marginBottom: 32, width: 'fit-content', transition: 'color 0.2s', padding: 0 }}
           onMouseEnter={e => e.currentTarget.style.color = '#0f172a'}
