@@ -35,7 +35,8 @@ export default function PublicBooking() {
   const navigate = useNavigate();
   const { showToast } = useToast();
   const [step, setStep] = useState(1);
-  const [guestName, setGuestName] = useState('');
+  const [guestFirstName, setGuestFirstName] = useState('');
+  const [guestLastName, setGuestLastName] = useState('');
   const [guestPhone, setGuestPhone] = useState('');
   const [selectedService, setSelectedService] = useState(null);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
@@ -52,7 +53,7 @@ export default function PublicBooking() {
   ];
 
   const canProceed = () => {
-    if (step === 1) return guestName.trim() !== '' && guestPhone.trim() !== '';
+    if (step === 1) return guestFirstName.trim() !== '' && guestLastName.trim() !== '' && guestPhone.trim() !== '';
     if (step === 2) return selectedService !== null;
     if (step === 3) return selectedDoctor !== null;
     if (step === 4) return selectedDate && selectedTime;
@@ -182,13 +183,23 @@ export default function PublicBooking() {
             <p className="text-[#64748b] text-sm mb-6">Please provide your basic information for the appointment.</p>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-[#0f172a] mb-1.5">Guest Name</label>
+                <label className="block text-sm font-semibold text-[#0f172a] mb-1.5">Guest First Name</label>
                 <input 
                   type="text" 
-                  value={guestName} 
-                  onChange={(e) => setGuestName(e.target.value)} 
+                  value={guestFirstName} 
+                  onChange={(e) => setGuestFirstName(e.target.value)} 
                   className="w-full px-4 py-3 rounded-xl border border-[#cbd5e1] focus:border-[#0ea5e9] focus:ring-2 focus:ring-[#0ea5e9]/20 transition-all outline-none" 
-                  placeholder="e.g. John Doe" 
+                  placeholder="e.g. John" 
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-[#0f172a] mb-1.5">Guest Last Name</label>
+                <input 
+                  type="text" 
+                  value={guestLastName} 
+                  onChange={(e) => setGuestLastName(e.target.value)} 
+                  className="w-full px-4 py-3 rounded-xl border border-[#cbd5e1] focus:border-[#0ea5e9] focus:ring-2 focus:ring-[#0ea5e9]/20 transition-all outline-none" 
+                  placeholder="e.g. Doe" 
                 />
               </div>
               <div>

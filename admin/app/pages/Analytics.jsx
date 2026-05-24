@@ -4,19 +4,36 @@ import { useNavigate } from 'react-router';
 export default function Analytics() {
   const navigate = useNavigate();
 
+  // Match fields from Django admin_dashboard:
+  // total_patients, total_doctors, total_services, appointments_today, pending_today, appointments_per_doctor_today, most_booked_service
+  const dashboardData = {
+    total_patients: 120,
+    total_doctors: 18,
+    total_services: 6,
+    appointments_today: 25,
+    pending_today: 3,
+    most_booked_service: 'Cardiology',
+    appointments_per_doctor_today: [
+      { doctor: 'Dr. Sarah Jenkins', appointments: 8 },
+      { doctor: 'Dr. Emily Watson', appointments: 6 },
+      { doctor: 'Dr. Lisa Park', appointments: 5 },
+      { doctor: 'Dr. Michael Chen', appointments: 4 },
+      { doctor: 'Dr. James Miller', appointments: 2 },
+    ]
+  };
+
   const kpis = [
-    { label: 'Patient Satisfaction', value: '94%', change: '+3.2%', up: true, color: 'text-emerald-600' },
-    { label: 'Avg Wait Time', value: '12 min', change: '-18%', up: false, color: 'text-emerald-600' },
-    { label: 'Bed Occupancy', value: '78%', change: '+5%', up: true, color: 'text-amber-600' },
-    { label: 'Readmission Rate', value: '4.2%', change: '-1.1%', up: false, color: 'text-emerald-600' },
+    { label: 'Total Patients', value: dashboardData.total_patients, change: '+8%', up: true, color: 'text-emerald-600' },
+    { label: 'Total Doctors', value: dashboardData.total_doctors, change: '+2', up: true, color: 'text-emerald-600' },
+    { label: 'Appointments Today', value: dashboardData.appointments_today, change: '+3', up: true, color: 'text-emerald-600' },
+    { label: 'Pending Appointments', value: dashboardData.pending_today, change: '-1', up: false, color: 'text-emerald-600' },
   ];
 
-  const departmentPerf = [
-    { name: 'Pulmonology', throughput: 85, change: '+12.5%', color: '#0ea5e9' },
-    { name: 'Hematology', throughput: 72, change: '+8.2%', color: '#f43f5e' },
-    { name: 'Nephrology', throughput: 45, change: '-2.4%', color: '#f59e0b', negative: true },
-    { name: 'Gastroenterology', throughput: 91, change: '+18.0%', color: '#6366f1' },
-    { name: 'Cardiology', throughput: 88, change: '+9.7%', color: '#10b981' },
+  const servicePerf = [
+    { name: 'Cardiology', throughput: 88, change: 'Most Booked', color: '#10b981' },
+    { name: 'Pediatrics', throughput: 75, change: 'Active', color: '#0ea5e9' },
+    { name: 'Neurology', throughput: 62, change: 'Active', color: '#8b5cf6' },
+    { name: 'General Medicine', throughput: 55, change: 'Active', color: '#64748b' },
   ];
 
   const monthlyData = [
@@ -68,15 +85,15 @@ export default function Analytics() {
           </div>
         </div>
 
-        {/* Department Performance */}
+        {/* Service Performance */}
         <div className="bg-white rounded-2xl border border-[#e2e8f0] p-6">
-          <h3 className="font-bold text-[#171c1f] mb-6">Department Performance</h3>
+          <h3 className="font-bold text-[#171c1f] mb-6">Service Performance</h3>
           <div className="space-y-4">
-            {departmentPerf.map((d, i) => (
+            {servicePerf.map((d, i) => (
               <div key={i}>
                 <div className="flex items-center justify-between mb-1.5">
                   <span className="text-sm font-semibold text-[#171c1f]">{d.name}</span>
-                  <span className={`text-xs font-bold ${d.negative ? 'text-red-500' : 'text-emerald-600'}`}>{d.change}</span>
+                  <span className="text-xs font-bold text-emerald-600">{d.change}</span>
                 </div>
                 <div className="h-2 bg-[#f1f5f9] rounded-full overflow-hidden">
                   <div className="h-full rounded-full transition-all" style={{ width: `${d.throughput}%`, backgroundColor: d.color }} />

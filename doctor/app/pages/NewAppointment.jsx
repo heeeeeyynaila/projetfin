@@ -100,9 +100,15 @@ export default function NewAppointment() {
                         <label className={labelClass}>Patient ID</label>
                         <input type="text" placeholder="Enter patient ID (optional)" className={inputClass} />
                       </div>
+                    </div>
+                    <div className="field-animate grid grid-cols-1 md:grid-cols-2 gap-6" style={{ animationDelay: '0.18s' }}>
                       <div className="space-y-2">
-                        <label className={labelClass}>Guest Name</label>
-                        <input type="text" placeholder="Guest full name (if no patient ID)" className={inputClass} />
+                        <label className={labelClass}>Guest First Name</label>
+                        <input type="text" placeholder="Guest first name" className={inputClass} />
+                      </div>
+                      <div className="space-y-2">
+                        <label className={labelClass}>Guest Last Name</label>
+                        <input type="text" placeholder="Guest last name" className={inputClass} />
                       </div>
                     </div>
                     <div className="field-animate grid grid-cols-1 md:grid-cols-2 gap-6" style={{ animationDelay: '0.2s' }}>
